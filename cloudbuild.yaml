@@ -1,0 +1,26 @@
+secrets: 
+  - 
+    kmsKeyName: projects/aronday-ie/locations/global/keyRings/aronday-ie/cryptoKeys/firebase
+    secretEnv: 
+      FIREBASE_TOKEN: "\
+      CiQA9cikLhsZr1oP4fdm9Xkd40wOxMLLKWUiLdjoPquX4BDgF6oSkAEAEzXXqwZEnPdutKVpAVQc\
+      O8d/o4nco4n4rofn4wmuFMl7rBTtYBrjSJoQ4KEcA+Y4wOWGb6z+ZBwQKIiKC5BhOC4i5i7uuUAh\
+      6d01mEP13ZLmdmdswWRpbmQke0DwLGA8e6CM3GPPcRzRg/OQ4IQfylFgBbgYrF9nD0EKhZ7mYS5j\
+      cSTMQMVZ1+fuEe3ciT8="
+steps: 
+  - name: gcr.io/$PROJECT_ID/hugo
+    args: [
+      "version"
+      ]
+  - name: gcr.io/$PROJECT_ID/hugo
+    args: [
+      "-s","hugo",
+      "-d","../public"
+      ]
+  - name: gcr.io/$PROJECT_ID/firebase
+    args: 
+      - "-c"
+      - "firebase deploy --project=$PROJECT_ID --only=hosting --token=$$FIREBASE_TOKEN\n"
+    entrypoint: bash
+    secretEnv: 
+      - FIREBASE_TOKEN

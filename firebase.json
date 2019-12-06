@@ -1,0 +1,14 @@
+{
+  "hosting": {
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/node_modules/**"
+    ],
+    "redirects":[ {
+      "source": "/ops",
+      "destination": "https://ops.com",
+      "type": 302
+    }]
+  }
+}
